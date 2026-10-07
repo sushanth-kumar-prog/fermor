@@ -4,6 +4,23 @@ Understand and compare money decisions. A single page React app with a working S
 calculator, a working EMI calculator, and a searchable library of plain language answers.
 No sign up, no backend, no tracking.
 
+**Live:** https://fermor-tan.vercel.app
+
+## Screenshots
+
+| | |
+|---|---|
+| ![Hero](docs/screenshots/01-hero.png) | ![Dark CTA](docs/screenshots/02-cta.png) |
+| Hero, with the projected value illustration | Closing CTA and the savings donut |
+| ![Integrations](docs/screenshots/03-integrations.png) | ![Features](docs/screenshots/04-features.png) |
+| The account types it lines up for you | The three live tools in the carousel |
+| ![Personas](docs/screenshots/05-personas.png) | ![FAQ](docs/screenshots/06-faq.png) |
+| Who it is for, and the reads that go with it | An answer opened, with its source |
+
+Captured from the live deployment at 1296 by 894. They live in `docs/` rather than
+`public/` so they are committed to the repository without being bundled into the built
+site.
+
 ## Stack
 
 - **React 18** + **Vite 8**
