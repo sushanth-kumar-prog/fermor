@@ -30,14 +30,12 @@ export default function StickyMobileCta() {
 
   return (
     <div
-      className="md:hidden fixed bottom-0 inset-x-0 z-40 px-4 pb-4 pt-2"
-      style={{ background: "linear-gradient(to top, var(--fermor-bg) 70%, transparent)" }}
+      className="md:hidden fixed bottom-0 inset-x-0 z-40 px-4 pb-4 pt-6"
+      style={{
+        background: "linear-gradient(to top, var(--fm-light) 62%, rgba(244,244,242,0) 100%)",
+      }}
     >
-      <a
-        href="#calculators"
-        className="fermor-focus flex items-center justify-center w-full px-6 py-3.5 rounded-full text-sm font-semibold"
-        style={{ background: "var(--fermor-ink)", color: "var(--fermor-bg)" }}
-      >
+      <a href="#calculators" className="fm-btn fm-btn-lime w-full">
         Explore calculators
       </a>
     </div>

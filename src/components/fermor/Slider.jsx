@@ -41,35 +41,42 @@ export default function Slider({
 
   return (
     <div>
-      <div className="flex items-baseline justify-between mb-2.5">
-        <label className="text-sm font-medium" style={{ color: "var(--fermor-ink)" }}>
+      <div className="flex items-baseline justify-between mb-3">
+        <label className="text-sm font-medium" style={{ color: "var(--fm-ink)" }}>
           {label}
         </label>
-        <div className="fermor-tabular text-lg font-semibold" style={{ color: "var(--fermor-ink)" }}>
+        <div className="fm-tabular font-display text-lg font-semibold" style={{ color: "var(--fm-ink)" }}>
           {formatValue ? formatValue(value) : value}
         </div>
       </div>
+
       <input
         type="range"
-        className="fermor-slider fermor-focus"
+        className="fm-slider fm-focus"
         min={min}
         max={max}
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         aria-label={label}
+        aria-valuetext={formatValue ? formatValue(value) : undefined}
         style={{
-          background: `linear-gradient(to right, var(--fermor-mint) 0%, var(--fermor-mint) ${pct}%, var(--fermor-track) ${pct}%, var(--fermor-track) 100%)`,
+          background: `linear-gradient(to right, #B9FF3C 0%, #B9FF3C ${pct}%, rgba(10,10,10,0.10) ${pct}%, rgba(10,10,10,0.10) 100%)`,
         }}
       />
-      <div className="flex items-center justify-between mt-2">
-        <span className="text-xs" style={{ color: "var(--fermor-ink-soft)" }}>
+
+      <div className="flex items-center justify-between mt-2.5 gap-2">
+        <span className="fm-tabular text-[11px] font-medium" style={{ color: "var(--fm-ink-soft)" }}>
           {formatValue ? formatValue(min) : min}
         </span>
         <input
           type="number"
-          className="w-24 text-right text-sm fermor-tabular bg-transparent border-0 focus:outline-none fermor-focus rounded px-1"
-          style={{ color: "var(--fermor-ink)" }}
+          className="fm-tabular w-24 rounded-lg border px-2 py-1 text-right text-sm font-semibold focus:outline-none fm-focus"
+          style={{
+            background: "var(--fm-surface)",
+            borderColor: "var(--fm-line-strong)",
+            color: "var(--fm-ink)",
+          }}
           value={text}
           onChange={handleText}
           min={min}
@@ -77,17 +84,18 @@ export default function Slider({
           step={step}
           aria-label={`${label} value`}
         />
-        <span className="text-xs" style={{ color: "var(--fermor-ink-soft)" }}>
+        <span className="fm-tabular text-[11px] font-medium" style={{ color: "var(--fm-ink-soft)" }}>
           {formatValue ? formatValue(max) : max}
         </span>
       </div>
+
       {message && (
-        <p className="text-xs mt-1.5" style={{ color: "var(--fermor-ink)" }}>
+        <p className="mt-2 text-xs font-medium" style={{ color: "var(--fm-ink)" }}>
           {message}
         </p>
       )}
       {hint && !message && (
-        <p className="text-xs mt-1.5" style={{ color: "var(--fermor-ink-soft)" }}>
+        <p className="mt-2 text-xs" style={{ color: "var(--fm-ink-soft)" }}>
           {hint}
         </p>
       )}

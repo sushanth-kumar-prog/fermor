@@ -41,7 +41,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="fermor-page min-h-screen">
+    <div className="fm-shell min-h-screen">
       <Navbar />
       <main>
         <Hero />

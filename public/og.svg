@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="glow" cx="78%" cy="18%" r="72%">
+      <stop offset="0%" stop-color="#1d5230"/>
+      <stop offset="100%" stop-color="#071A0E"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g transform="translate(80 74)">
+    <rect width="56" height="56" rx="14" fill="#B9FF3C"/>
+    <path d="M18 42V16h14a6.5 6.5 0 0 1 0 13H18" fill="none" stroke="#0C2314" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="72" y="42" font-family="Poppins, Segoe UI, sans-serif" font-size="34" font-weight="700" fill="#F4F4F2">Fermor</text>
+  </g>
+  <text x="80" y="300" font-family="Poppins, Segoe UI, sans-serif" font-size="76" font-weight="700" fill="#F4F4F2">
+    <tspan x="80" dy="0">Understand and</tspan>
+    <tspan x="80" dy="86">compare money</tspan>
+    <tspan x="80" dy="86">decisions.</tspan>
+  </text>
+  <text x="80" y="552" font-family="Inter, Segoe UI, sans-serif" font-size="27" fill="#B9FF3C">Free SIP + EMI calculators. No sign-up.</text>
+</svg>

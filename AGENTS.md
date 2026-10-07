@@ -1,36 +1,36 @@
-const db = globalThis.__B44_DB__ || { auth:{ isAuthenticated: async()=>false, me: async()=>null }, entities:new Proxy({}, { get:()=>({ filter:async()=>[], get:async()=>null, create:async()=>({}), update:async()=>({}), delete:async()=>({}) }) }), integrations:{ Core:{ UploadFile:async()=>({ file_url:'' }) } } };
-
 # AGENTS.md
 
 ## Project Context
 
-This is a Base44 app repository. Treat it as user-owned application code, keep changes focused on the user's request, and preserve existing project conventions.
+Fermor is a static single-page React/Vite app: SIP and EMI calculators plus a local
+answer library. There is no backend, no database, and no authentication. Treat it as
+user-owned application code, keep changes focused on the request, and follow existing
+conventions.
 
-Start with `README.md` for local setup, environment variables, and publish workflow.
-
-## Base44 References
-
-- CLI overview: https://docs.db.com/developers/references/cli/get-started/overview.md
-- Agent skills: https://docs.db.com/developers/backend/overview/skills.md
-
-If your agent supports Agent Skills, install or update Base44 skills before Base44-specific work:
-
-```bash
-npx skills add base44/skills
-```
+Start with `README.md` for setup, structure, and the design system.
 
 ## Key Files
 
-- `src/`: frontend application source.
-- `src/api/base44Client.js`: frontend Base44 SDK client.
-- `vite.config.js`: Vite config and Base44 Vite plugin setup.
-- `.env.local`: local-only environment values; never commit secrets.
+- `src/pages/Home.jsx` — the only page; composes every section in order.
+- `src/components/fermor/` — all sections plus `Logo`, `Navbar`, `Footer`, `Slider`.
+- `src/lib/fermor/` — brand config, pure calculator maths, INR formatting, answer content.
+- `src/index.css` — design tokens (`--fm-*`) and shared component classes.
+- `src/components/ui/` — shadcn primitives. Only lightly used; don't grow this folder
+  without a reason.
+- `vercel.json` — build config and the SPA rewrite.
 
 ## Working Notes
 
-- Use `base44 dev` as the default local development command when you need the local Base44 backend. It can run the backend and frontend together.
-- When docs or code mention the frontend being started automatically, that usually means the Base44 project config includes `site.serveCommand`, for example `"serveCommand": "npm run dev"` in `base44/config.jsonc`.
-- Use `npm run dev` only for frontend-only work against the hosted Base44 backend.
-- Prefer the existing Base44 CLI workflow over adding new npm scripts for Base44-specific tasks.
-- Reuse the existing SDK client and Vite plugin patterns before adding new Base44 integration paths.
-- Run the relevant checks from `package.json` before finishing code changes.
+- **`npm run dev` is correct here.** This is a plain Vite app — there is no separate
+  backend to start, and no Base44 CLI in the loop.
+- **Never hand-roll the calculator maths.** `src/lib/fermor/calculations.js` is pure and
+  testable; extend it rather than computing inside a component.
+- **Keep every financial disclaimer attached to the number it qualifies.** The SIP and
+  EMI assumptions live in `config.js`; render the disclaimer directly below the result.
+- **Use the design tokens.** Prefer `fm-*` component classes and `--fm-*` variables over
+  new hex literals, and keep lime (`#B9FF3C`) paired with dark text.
+- **The brand name is not hardcoded.** Change it in `src/lib/fermor/config.js`; the logo,
+  footer, and 404 all read from there.
+- **Respect `prefers-reduced-motion`.** `index.css` neutralises transitions globally;
+  the number-tweening hook in `SipCalculator.jsx` short-circuits when it's set.
+- Run `npm run lint` and `npm run build` before finishing code changes.

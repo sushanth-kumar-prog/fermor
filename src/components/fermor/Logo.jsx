@@ -1,22 +1,32 @@
 import React from "react";
 import { FERMOR } from "@/lib/fermor/config";
 
-// Fermor geometric mark: two shapes in mint, plus the wordmark in navy.
-export default function Logo({ showWordmark = true, className = "" }) {
+/**
+ * Fermor mark: a lime tile with a forest "F" counterform.
+ * `tone` picks the wordmark colour — "dark" for light backgrounds,
+ * "light" for the forest backgrounds.
+ */
+export default function Logo({ showWordmark = true, tone = "dark", className = "" }) {
+  const wordmarkColor = tone === "light" ? "#F4F4F2" : "#0A0A0A";
+  const counterColor = tone === "light" ? "#071A0E" : "#0C2314";
+
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-        <rect x="2" y="2" width="24" height="24" rx="7" fill="#75FB90" />
+      <svg width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <rect width="64" height="64" rx="16" fill="#B9FF3C" />
         <path
-          d="M9 19V9h6.5a3.5 3.5 0 0 1 0 7H9"
-          stroke="#16233B"
-          strokeWidth="2.4"
+          d="M20 46V18h17a8 8 0 0 1 0 16H20"
+          stroke={counterColor}
+          strokeWidth="6"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
       </svg>
       {showWordmark && (
-        <span className="fermor-heading text-[22px] leading-none" style={{ color: "var(--fermor-ink)" }}>
+        <span
+          className="font-display text-[22px] font-bold leading-none tracking-[-0.03em]"
+          style={{ color: wordmarkColor }}
+        >
           {FERMOR.name}
         </span>
       )}

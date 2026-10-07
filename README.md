@@ -1,64 +1,136 @@
-const db = globalThis.__B44_DB__ || { auth:{ isAuthenticated: async()=>false, me: async()=>null }, entities:new Proxy({}, { get:()=>({ filter:async()=>[], get:async()=>null, create:async()=>({}), update:async()=>({}), delete:async()=>({}) }) }), integrations:{ Core:{ UploadFile:async()=>({ file_url:'' }) } } };
+# Fermor
 
-# Base44 Project
+Understand and compare money decisions. A single-page React app with a working SIP
+calculator, a working EMI calculator, and a searchable set of plain-language answers —
+no sign-up, no backend, no tracking.
 
-Use this repository to run and edit the app locally, then publish changes back through db.
+## Stack
 
-Any change pushed to the repo will also be reflected in the Base44 Builder.
+- **React 18** + **Vite 8**
+- **React Router 6** (`BrowserRouter`)
+- **Tailwind CSS 3** with a small set of Fermor design tokens
+- **Framer Motion** for the hero reveal
+- **Lucide React** for icons
+- No backend. All content is local (`src/lib/fermor/`), all calculations run in the browser.
 
-## Prerequisites
-
-1. Clone the repository using the project's Git URL.
-2. Navigate to the project directory.
-3. Install dependencies: `npm install`.
-4. Install the Base44 CLI: `npm install -g base44@latest`.
-5. Install [Deno](https://docs.deno.com/runtime/getting_started/installation/) — the local Base44 backend runs on it.
-
-Run `base44 --help` (or see the [CLI reference](https://docs.db.com/developers/references/cli/commands/introduction)) for the full command surface.
-
-## Run Locally
-
-Three commands, from the project root:
+## Getting started
 
 ```bash
-base44 login   # one-time per machine
-base44 link    # one-time per clone
-base44 dev     # local backend + frontend together
+npm install
+npm run dev      # http://localhost:5173
 ```
 
-Open the frontend URL that `base44 dev` prints (typically `http://localhost:5173`).
+## Scripts
 
-Notes:
+| Command | Purpose |
+|---|---|
+| `npm run dev` | Vite dev server with HMR |
+| `npm run build` | Production build into `dist/` |
+| `npm run preview` | Serve the built `dist/` locally |
+| `npm run lint` | ESLint (errors only) |
+| `npm run lint:fix` | ESLint with autofix |
+| `npm run typecheck` | `tsc` against `jsconfig.json` |
 
-- **Every fresh clone needs `base44 link`.** It writes `base44/.app.jsonc` (the app-id pointer), which is deliberately gitignored. Your app id is in the Builder URL (`app.db.com/apps/<id>/...`); `base44 link --help` shows the non-interactive flags.
-- **`base44 dev` runs the frontend for you** (via `site.serveCommand` in this repo's `base44/config.jsonc`) — never run `npm run dev` yourself: alone it serves a UI with no backend behind it (`[base44] Proxy not enabled`, every `/api` call fails), and alongside `base44 dev` the second Vite silently takes the next port and you end up looking at the wrong one.
-- **The app must be published at least once for the UI to load under `base44 dev`.** The frontend boots by fetching app settings from the hosted app; before the first publish that fails and every page redirects to login. The local API works regardless.
-- Entities, functions, and auth run locally — entity data is **in-memory only**, wiped when `base44 dev` restarts. Everything else (Core integrations, OAuth login) is forwarded to your deployed app. Full breakdown: [Local development overview](https://docs.db.com/developers/backend/overview/local-dev/local-development-overview).
+Run `npm run lint` and `npm run build` before committing.
 
-## Frontend Only, Hosted Backend
+## Project structure
 
-To work on just the frontend against your app's live hosted backend:
+```
+src/
+  App.jsx                  Routes + providers
+  main.jsx                 Entry point
+  index.css                Design tokens + component classes
+  pages/
+    Home.jsx               The single page; composes sections in order
+  components/
+    fermor/                All page sections and the shared brand pieces
+    ui/                    shadcn/ui primitives (only lightly used)
+    ScrollToTop.jsx        Resets scroll on route/hash change
+  lib/
+    fermor/
+      config.js            Brand name, tagline, disclaimers, SIP assumptions
+      calculations.js      Pure SIP/EMI math + slider bounds
+      format.js            INR / lakh / crore formatting
+      askFermorContent.js  The answer library
+    query-client.js        React Query client
+    PageNotFound.jsx       404
+    utils.js               `cn()` classname helper
+public/
+  favicon.svg              Brand mark
+  og.svg                   Social preview image
+  robots.txt
+vercel.json                SPA rewrites + build config
+```
+
+### Section order
+
+`Home.jsx` composes, top to bottom:
+
+1. `Navbar` — sticky forest header
+2. `Hero` — headline, CTAs, device-framed `SipCalculator`, `SampleSnapshot`
+3. `TrustStrip` — four trust tiles
+4. `CalculatorCards` — question → tool shortcuts
+5. `EmiCalculator` — loan cost calculator with year-by-year schedule
+6. `ProductExplainer` — Understand / Compare / Act
+7. `AskFermor` — searchable answer library
+8. `Audience` — who it's for
+9. `Learning` — editorial teasers into `AskFermor`
+10. `FinalCta` — closing call to action
+11. `Footer` + `StickyMobileCta`
+
+## Design system
+
+Tokens live in `src/index.css` under `--fm-*`. Tailwind exposes `lime`, `forest`, and
+`paper` colour scales plus a `font-display` family.
+
+| Token | Value | Use |
+|---|---|---|
+| `--fm-lime` | `#B9FF3C` | Primary accent, always with dark text on it |
+| `--fm-dark` | `#0C2314` | Dark section background |
+| `--fm-dark-deep` | `#0C2314` → `#071A0E` | Footer |
+| `--fm-light` | `#F4F4F2` | Light section background |
+| `--fm-surface` | `#FFFFFF` | Cards on light |
+| `--fm-ink` | `#0A0A0A` | Text on light |
+| `--fm-ink-soft` | `#5C6157` | Secondary text on light |
+| `--fm-on-dark-soft` | `rgba(244,244,242,0.66)` | Secondary text on dark |
+
+Type: **Poppins** (700/800) for display headings, **Inter** for body — both loaded from
+Google Fonts in `index.html`.
+
+Reusable classes (all in `@layer components`): `fm-section`, `fm-display`, `fm-eyebrow`,
+`fm-lead`, `fm-btn` + `fm-btn-lime/dark/outline/outline-light`, `fm-card`,
+`fm-card-dark`, `fm-card-feature`, `fm-tile`, `fm-chip`, `fm-tag`, `fm-note`,
+`fm-track`, `fm-slider`, `fm-tabular`.
+
+Prefer these over one-off hex values — the violet/blue tokens from the earlier design are gone.
+
+## Calculator maths
+
+`src/lib/fermor/calculations.js` holds pure, testable functions:
+
+- `sipFutureValue(P, annualReturnPct, years)` — standard SIP future value.
+- `emiCalc(principal, annualRatePct, years)` — reducing-balance EMI plus a
+  year-by-year schedule.
+
+The SIP projection assumes a flat **12%** annual return (`FERMOR.sipAssumedReturn` in
+`config.js`). This is an estimate, not a projection — the disclaimer is rendered directly
+beneath the result.
+
+## Deploying to Vercel
+
+`vercel.json` pins the framework, build command, output directory, and the SPA rewrite
+so client-side routes don't 404 on a hard refresh.
 
 ```bash
-base44 dev --remote
+npx vercel            # preview
+npx vercel --prod     # production
 ```
 
-⚠️ In this mode writes go to your app's **production data** — plain `base44 dev` keeps everything local.
+Connect the GitHub repo in the Vercel dashboard for automatic deploys on push.
 
-## Publish Your Changes
+## Notes
 
-After pushing your changes to git, open the Base44 dashboard and publish the app:
-
-```bash
-base44 dashboard open
-```
-
-This repo syncs to Base44 through git, so publish from the dashboard rather than `base44 deploy` — a CLI deploy ships your local tree directly, bypassing the sync, and the deployed state silently diverges from the repo.
-
-## Docs & Support
-
-GitHub integration: [https://docs.db.com/developers/app-code/local-development/github](https://docs.db.com/developers/app-code/local-development/github)
-
-Local development: [https://docs.db.com/developers/backend/overview/local-dev/local-development-overview](https://docs.db.com/developers/backend/overview/local-dev/local-development-overview)
-
-Support: [https://app.db.com/support](https://app.db.com/support)
+- The `og.svg` preview image is SVG. Twitter and Facebook do not render SVG Open Graph
+  images — replace it with a 1200×630 PNG before relying on link previews.
+- Money formatting uses `Intl.NumberFormat("en-IN")` with lakh/crore compaction, so all
+  amounts assume Indian numbering.
