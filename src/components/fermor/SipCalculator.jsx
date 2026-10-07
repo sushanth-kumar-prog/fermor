@@ -55,17 +55,49 @@ export default function SipCalculator() {
   const animGrowth = useAnimatedNumber(growth);
 
   return (
-    <div className="p-5 md:p-6" style={{ background: "var(--fm-light)" }}>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="font-display text-lg font-semibold tracking-[-0.02em]" style={{ color: "var(--fm-ink)" }}>
-          SIP Calculator
-        </h2>
+    <div
+      className="px-6 md:px-7 pt-6 pb-7 border-t"
+      style={{ borderColor: "var(--fm-line)", background: "var(--fm-light)" }}
+    >
+      <div className="flex items-center justify-between mb-5">
+        <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: "var(--fm-ink-soft)" }}>
+          Estimated value
+        </span>
         <span
-          className="rounded-full px-2.5 py-1 text-[11px] font-semibold"
+          className="rounded-full px-2.5 py-1 text-[10px] font-bold tracking-wider"
           style={{ background: "var(--fm-lime)", color: "var(--fm-dark)" }}
         >
-          Live estimate
+          LIVE
         </span>
+      </div>
+
+      <p
+        className="fm-tabular font-display text-[42px] font-extrabold leading-none tracking-[-0.04em] mb-1.5"
+        style={{ color: "var(--fm-ink)" }}
+      >
+        {formatCompact(animFv)}
+      </p>
+      <p className="fm-tabular text-sm mb-6" style={{ color: "var(--fm-ink-soft)" }}>
+        {formatRupees(animFv, { decimals: 0 })}
+      </p>
+
+      <div className="grid grid-cols-2 gap-3 mb-7">
+        <div className="fm-tile-flat px-4 py-3">
+          <p className="text-[11px] mb-1" style={{ color: "var(--fm-ink-soft)" }}>
+            You put in
+          </p>
+          <p className="fm-tabular font-display text-base font-semibold" style={{ color: "var(--fm-ink)" }}>
+            {formatCompact(animInvested)}
+          </p>
+        </div>
+        <div className="fm-tile-flat px-4 py-3">
+          <p className="text-[11px] mb-1" style={{ color: "var(--fm-ink-soft)" }}>
+            The gain
+          </p>
+          <p className="fm-tabular font-display text-base font-semibold" style={{ color: "var(--fm-dark)" }}>
+            {formatCompact(animGrowth)}
+          </p>
+        </div>
       </div>
 
       <div className="space-y-7">
@@ -89,54 +121,22 @@ export default function SipCalculator() {
         />
       </div>
 
-      <div className="mt-7 pt-6 border-t" style={{ borderColor: "var(--fm-line)" }}>
-        <p className="fm-eyebrow mb-1.5">Estimated value</p>
-        <p
-          className="fm-tabular font-display text-[40px] md:text-[46px] font-extrabold leading-none tracking-[-0.03em]"
-          style={{ color: "var(--fm-ink)" }}
+      <div className="fm-note mt-7">
+        <svg
+          className="fm-note-icon"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          aria-hidden="true"
         >
-          {formatCompact(animFv)}
-        </p>
-        <p className="fm-tabular text-sm mt-1.5" style={{ color: "var(--fm-ink-soft)" }}>
-          {formatRupees(animFv, { decimals: 0 })}
-        </p>
-
-        <div className="grid grid-cols-2 gap-3 mt-6">
-          <div className="fm-tile-flat px-4 py-3">
-            <p className="text-xs mb-1" style={{ color: "var(--fm-ink-soft)" }}>
-              You invest
-            </p>
-            <p className="fm-tabular font-display text-lg font-semibold" style={{ color: "var(--fm-ink)" }}>
-              {formatCompact(animInvested)}
-            </p>
-          </div>
-          <div className="fm-tile-flat px-4 py-3">
-            <p className="text-xs mb-1" style={{ color: "var(--fm-ink-soft)" }}>
-              Estimated growth
-            </p>
-            <p className="fm-tabular font-display text-lg font-semibold" style={{ color: "var(--fm-dark)" }}>
-              {formatCompact(animGrowth)}
-            </p>
-          </div>
-        </div>
-
-        <div className="fm-note mt-5">
-          <svg
-            className="fm-note-icon"
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="9" />
-            <path d="M12 11v5M12 8h.01" />
-          </svg>
-          <p>{FERMOR.sipReturnLabel}</p>
-        </div>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 11v5M12 8h.01" />
+        </svg>
+        <p>{FERMOR.sipReturnLabel}</p>
       </div>
     </div>
   );

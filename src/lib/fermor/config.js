@@ -4,8 +4,9 @@ export const FERMOR = {
   name: "Fermor",
   tagline: "Understand and compare money decisions.",
   disclaimer:
-    "Fermor provides educational tools and information. It is not a SEBI-registered investment adviser and does not provide personalised investment advice.",
+    "Fermor builds educational tools, nothing more. We are not a SEBI registered investment adviser and we do not give personalised investment advice.",
   // Assumed annual return used by the SIP calculator projection.
   sipAssumedReturn: 12,
-  sipReturnLabel: "Estimate based on an assumed 12% annual return. Not guaranteed.",
+  sipReturnLabel:
+    "Based on an assumed 12% annual return. Markets are not a savings account, so treat this as an estimate rather than a promise.",
 };

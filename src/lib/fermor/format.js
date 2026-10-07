@@ -17,7 +17,7 @@ export function formatRupees(value, { decimals = 0 } = {}) {
   }).format(value);
 }
 
-// Compact form: ₹1.2 Cr, ₹4.5 L, ₹12.3 K — handy for big numbers.
+// Compact form: ₹1.2 Cr, ₹4.5 L, ₹12.3 K, handy for big numbers.
 export function formatCompact(value) {
   if (!Number.isFinite(value)) return "₹0";
   const abs = Math.abs(value);

@@ -30,7 +30,7 @@ export function emiCalc(principal, annualRatePct, years) {
   const totalPayment = emi * N;
   const totalInterest = totalPayment - principal;
 
-  // Year-by-year balance breakdown.
+  // Year by year balance breakdown.
   let balance = principal;
   const schedule = [];
   for (let y = 1; y <= Math.ceil(years); y++) {

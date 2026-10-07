@@ -1,14 +1,14 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Navbar from "@/components/fermor/Navbar";
 import Hero from "@/components/fermor/Hero";
-import TrustStrip from "@/components/fermor/TrustStrip";
+import Stats from "@/components/fermor/Stats";
 import CalculatorCards from "@/components/fermor/CalculatorCards";
-import EmiCalculator from "@/components/fermor/EmiCalculator";
+import DarkCta from "@/components/fermor/DarkCta";
+import Integrations from "@/components/fermor/Integrations";
+import FeatureCarousel from "@/components/fermor/FeatureCarousel";
 import ProductExplainer from "@/components/fermor/ProductExplainer";
-import AskFermor from "@/components/fermor/AskFermor";
 import Audience from "@/components/fermor/Audience";
-import Learning from "@/components/fermor/Learning";
-import FinalCta from "@/components/fermor/FinalCta";
+import AskFermor from "@/components/fermor/AskFermor";
 import Footer from "@/components/fermor/Footer";
 import StickyMobileCta from "@/components/fermor/StickyMobileCta";
 import { ASK_FERMOR } from "@/lib/fermor/askFermorContent";
@@ -26,14 +26,13 @@ export default function Home() {
     setExternalAnswerId(null);
   }, []);
 
-  // Learning teasers dispatch a custom event with an answer id.
+  // The reads section dispatches a custom event carrying an answer id.
   useEffect(() => {
     function onOpenAnswer(e) {
-      const id = e.detail;
-      const found = ASK_FERMOR.find((a) => a.id === id);
+      const found = ASK_FERMOR.find((a) => a.id === e.detail);
       if (found) {
         setExternalTopic(found.topic);
-        setExternalAnswerId(id);
+        setExternalAnswerId(found.id);
       }
     }
     window.addEventListener("fermor:open-answer", onOpenAnswer);
@@ -45,18 +44,18 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <TrustStrip />
+        <Stats />
         <CalculatorCards onSelectAskFermor={handleSelectAskFermor} />
-        <EmiCalculator />
+        <DarkCta />
+        <Integrations />
+        <FeatureCarousel />
         <ProductExplainer />
+        <Audience />
         <AskFermor
           externalTopic={externalTopic}
           externalAnswerId={externalAnswerId}
           onConsumeExternalTopic={consumeExternalTopic}
         />
-        <Audience />
-        <Learning />
-        <FinalCta />
       </main>
       <Footer />
       <StickyMobileCta />

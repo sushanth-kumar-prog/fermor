@@ -1,9 +1,17 @@
 import React from "react";
 
-// Line-illustration "graphic mathematical abstracts" for each calculator card.
-function SproutIcon({ size = 22 }) {
+function ScaleIcon() {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+    <svg width="22" height="22" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <path d="M20 8v26M14 34h12" strokeLinecap="round" />
+      <path d="M8 14h24l-4 9a4 4 0 0 1-8 0L8 14z" strokeLinejoin="round" />
+      <path d="M8 14l-3 9a4 4 0 0 0 8 0l-3-9" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function SproutIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
       <path d="M20 36V18" strokeLinecap="round" />
       <path d="M20 22c0-5 4-8 9-8 0 5-4 8-9 8z" strokeLinejoin="round" />
       <path d="M20 18c0-4-3-7-7-7 0 4 3 7 7 7z" strokeLinejoin="round" />
@@ -11,27 +19,18 @@ function SproutIcon({ size = 22 }) {
     </svg>
   );
 }
-function ScaleIcon({ size = 22 }) {
+function CompassIcon() {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-      <path d="M20 8v26M14 34h12" strokeLinecap="round" />
-      <path d="M8 14h24l-4 9a4 4 0 0 1-8 0L8 14z" strokeLinejoin="round" />
-      <path d="M8 14l-3 9a4 4 0 0 0 8 0l-3-9" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function CompassIcon({ size = 22 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+    <svg width="22" height="22" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
       <circle cx="20" cy="20" r="14" />
       <path d="M25 15l-7 3-3 7 7-3 3-7z" strokeLinejoin="round" />
       <circle cx="20" cy="20" r="1.5" fill="currentColor" />
     </svg>
   );
 }
-function VaultIcon({ size = 22 }) {
+function VaultIcon() {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+    <svg width="22" height="22" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
       <rect x="6" y="10" width="28" height="22" rx="3" />
       <circle cx="22" cy="21" r="6" />
       <path d="M22 15v3M22 24v3M16 21h3M25 21h3" strokeLinecap="round" />
@@ -48,21 +47,21 @@ const CARDS = [
     Icon: ScaleIcon,
   },
   {
-    question: "How much can my SIP grow?",
+    question: "How far can this SIP grow?",
     action: "Opens the SIP calculator",
-    href: "#top",
+    href: "#features",
     Icon: SproutIcon,
   },
   {
-    question: "Which tax regime suits me?",
-    action: "Opens Ask Fermor — tax answers",
+    question: "Which tax regime wins?",
+    action: "Opens the tax answers",
     href: "#ask-fermor",
     topic: "tax",
     Icon: CompassIcon,
   },
   {
-    question: "Where should I keep my savings?",
-    action: "Opens Ask Fermor — SIP vs FD",
+    question: "Savings account or FD?",
+    action: "Opens SIP vs FD",
     href: "#ask-fermor",
     topic: "savings",
     Icon: VaultIcon,
@@ -74,19 +73,18 @@ export default function CalculatorCards({ onSelectAskFermor }) {
     <section id="calculators" className="fm-section bg-paper">
       <div className="max-w-[1200px] mx-auto px-5 md:px-8">
         <div className="max-w-2xl mb-10 md:mb-14">
-          <p className="fm-eyebrow mb-3">Start with one question</p>
           <h2 className="fm-display text-[30px] md:text-[42px]">
-            Pick the question you came here to answer.
+            Pick the question you actually came here to answer.
           </h2>
           <p className="fm-lead mt-4">
-            Every card opens the tool that answers it — no forms, no redirects.
+            Four shortcuts, each opening the tool that settles the argument you are currently
+            having with someone at home.
           </p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {CARDS.map((card, i) => {
             const Icon = card.Icon;
-            // First card is the featured tile, matching the reference's lime card.
             const featured = i === 0;
             return (
               <a
@@ -106,7 +104,7 @@ export default function CalculatorCards({ onSelectAskFermor }) {
                   className="flex h-11 w-11 items-center justify-center rounded-full"
                   style={{
                     background: featured ? "rgba(7,26,14,0.12)" : "var(--fm-lime-wash)",
-                    color: featured ? "var(--fm-dark)" : "var(--fm-dark)",
+                    color: "var(--fm-dark)",
                   }}
                 >
                   <Icon />
@@ -118,7 +116,7 @@ export default function CalculatorCards({ onSelectAskFermor }) {
 
                 <p
                   className="mt-auto pt-4 text-sm font-medium inline-flex items-center gap-1.5"
-                  style={{ color: featured ? "rgba(7,26,14,0.7)" : "var(--fm-ink-soft)" }}
+                  style={{ color: featured ? "rgba(7,26,14,0.72)" : "var(--fm-ink-soft)" }}
                 >
                   {card.action}
                   <span

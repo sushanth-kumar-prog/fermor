@@ -31,7 +31,7 @@
     --fm-lime-wash-strong: rgba(185, 255, 60, 0.24);
 
     /* Type */
-    --fm-font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+    --fm-font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
     --fm-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
 
     --radius: 0.75rem;
@@ -373,6 +373,117 @@
 
   .fm-divider {
     border-color: var(--fm-line);
+  }
+
+  /* ----------------------------------------------------------------
+     Hero display type — the reference's oversized headline
+     ---------------------------------------------------------------- */
+  .fm-mega {
+    font-family: var(--fm-font-display);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+    text-transform: uppercase;
+    color: var(--fm-on-dark);
+  }
+
+  /* ----------------------------------------------------------------
+     Horizontal feature carousel
+     ---------------------------------------------------------------- */
+  .fm-scroll-x {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 0.5rem;
+    scroll-padding-left: 1rem;
+  }
+
+  .fm-scroll-x::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fm-scroll-x > * {
+    scroll-snap-align: start;
+    flex: 0 0 auto;
+  }
+
+  /* ----------------------------------------------------------------
+     FAQ accordion
+     ---------------------------------------------------------------- */
+  .fm-faq-row {
+    width: 100%;
+    border-radius: 1rem;
+    background: var(--fm-surface);
+    border: 1px solid var(--fm-line);
+    padding: 0.375rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .fm-faq-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    text-align: left;
+    padding: 1rem 1.125rem;
+    border-radius: 0.75rem;
+  }
+
+  .fm-faq-row:hover {
+    border-color: var(--fm-line-strong);
+  }
+
+  .fm-faq-open {
+    border-color: var(--fm-lime);
+    background: var(--fm-lime-wash);
+  }
+
+  .fm-faq-body {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--fm-ink-soft);
+  }
+
+  /* ----------------------------------------------------------------
+     Scattered integration chips
+     ---------------------------------------------------------------- */
+  .fm-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .fm-cloud-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.125rem;
+    border-radius: 9999px;
+    background: var(--fm-surface);
+    border: 1px solid var(--fm-line);
+    color: var(--fm-ink);
+    font-family: var(--fm-font-display);
+    font-weight: 600;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    box-shadow: 0 10px 30px -22px rgba(7, 26, 14, 0.5);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+
+  .fm-cloud-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--fm-line-strong);
+  }
+
+  /* SVG text needs the display face applied explicitly */
+  .fm-svg-display {
+    font-family: var(--fm-font-display);
   }
 }
 

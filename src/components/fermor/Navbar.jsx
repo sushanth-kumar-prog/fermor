@@ -4,23 +4,21 @@ import Logo from "./Logo";
 
 const NAV_LINKS = [
   { label: "Calculators", href: "#calculators" },
-  { label: "Ask Fermor", href: "#ask-fermor" },
-  { label: "About", href: "#about" },
+  { label: "Features", href: "#features" },
+  { label: "Answers", href: "#ask-fermor" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header
-      className="sticky top-0 z-40 bg-forest border-b border-white/10"
-    >
-      <div className="max-w-[1200px] mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
-        <a href="#top" className="fm-focus rounded" aria-label="Fermor home">
+    <header className="sticky top-0 z-40 bg-forest border-b border-white/10">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-8 h-16 flex items-center justify-between gap-6">
+        <a href="#top" className="fm-focus rounded shrink-0" aria-label="Fermor home">
           <Logo tone="light" />
         </a>
 
-        <nav className="hidden md:flex items-center gap-9">
+        <nav className="hidden md:flex items-center gap-8 lg:gap-10 mx-auto">
           {NAV_LINKS.map((l) => (
             <a
               key={l.href}
@@ -33,14 +31,15 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
-          <a href="#calculators" className="fm-btn fm-btn-lime fm-btn-sm">
-            Explore free calculators
-          </a>
-        </div>
+        <a
+          href="#calculators"
+          className="fm-btn fm-btn-lime fm-btn-sm hidden md:inline-flex shrink-0"
+        >
+          Get started
+        </a>
 
         <button
-          className="md:hidden fm-focus rounded p-2 -mr-2 transition-colors hover:bg-white/10"
+          className="md:hidden fm-focus rounded p-2 -mr-2 transition-colors hover:bg-white/10 shrink-0"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
@@ -69,7 +68,7 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               className="fm-btn fm-btn-lime w-full mt-3"
             >
-              Explore free calculators
+              Get started
             </a>
           </div>
         </div>
