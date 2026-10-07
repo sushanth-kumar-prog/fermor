@@ -197,6 +197,24 @@ npx vercel --prod     # production
 
 Importing the GitHub repo in the Vercel dashboard gives automatic deploys on push.
 
+### Current deployment
+
+| | |
+|---|---|
+| Production URL | https://fermor-tan.vercel.app |
+| Project | `fermor` (`prj_wCrGC0mwikx2Kyrq2k0P0S6Olvsu`) |
+| Scope | `sushanth-kumar-progs-projects`, hobby plan |
+| Linked by | `.vercel/project.json`, which is gitignored |
+
+The project is already connected to this account, so `vercel --prod` from the project root
+redeploys without any further linking. To get automatic deploys on push, import the repo in
+the Vercel dashboard and set the production branch to `master`.
+
+### On Windows
+
+PowerShell blocks the `vercel.ps1` shim under the default execution policy, so use
+`vercel.cmd` or `npx vercel` rather than bare `vercel`.
+
 ## Notes
 
 - `public/og.svg` is SVG. Twitter and Facebook do not render SVG Open Graph images, so
