@@ -6,15 +6,35 @@
     </radialGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#glow)"/>
-  <g transform="translate(80 74)">
-    <rect width="56" height="56" rx="14" fill="#B9FF3C"/>
-    <path d="M18 42V16h14a6.5 6.5 0 0 1 0 13H18" fill="none" stroke="#0C2314" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="72" y="42" font-family="Poppins, Segoe UI, sans-serif" font-size="34" font-weight="700" fill="#F4F4F2">Fermor</text>
+
+  <g transform="translate(80 66) scale(0.72)">
+    <circle cx="50" cy="50" r="42" fill="none" stroke="#B9FF3C" stroke-width="7"
+            stroke-dasharray="153.9 110" transform="rotate(150 50 50)" stroke-linecap="round"/>
+    <circle cx="50" cy="50" r="42" fill="none" stroke="#F4F4F2" stroke-width="7"
+            stroke-dasharray="110 153.9" stroke-linecap="round"/>
+    <g fill="#B9FF3C">
+      <rect x="30" y="58" width="10" height="14" rx="2.5"/>
+      <rect x="45" y="51" width="10" height="21" rx="2.5"/>
+      <rect x="60" y="44" width="10" height="28" rx="2.5"/>
+    </g>
+    <path d="M26 52l14-8 8 5 8-12" fill="none" stroke="#F4F4F2" stroke-width="4.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M48 37h8v8" fill="none" stroke="#F4F4F2" stroke-width="4.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <g stroke="#F4F4F2" stroke-width="4" stroke-linecap="round">
+      <path d="M62 22h15"/><path d="M62 28h12"/><path d="M67 22v16"/><path d="M62 31l15 9"/>
+    </g>
   </g>
-  <text x="80" y="300" font-family="Poppins, Segoe UI, sans-serif" font-size="76" font-weight="700" fill="#F4F4F2">
-    <tspan x="80" dy="0">Understand and</tspan>
-    <tspan x="80" dy="86">compare money</tspan>
-    <tspan x="80" dy="86">decisions.</tspan>
+
+  <text x="168" y="118" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-size="40"
+        font-weight="800" fill="#F4F4F2" letter-spacing="-1.2">Fermor</text>
+
+  <text x="80" y="330" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-size="76" font-weight="800" fill="#F4F4F2" letter-spacing="-2.5">
+    <tspan x="80" dy="0">Money math,</tspan>
+    <tspan x="80" dy="86">without the</tspan>
+    <tspan x="80" dy="86" fill="#B9FF3C">mystique.</tspan>
   </text>
-  <text x="80" y="552" font-family="Inter, Segoe UI, sans-serif" font-size="27" fill="#B9FF3C">Free SIP + EMI calculators. No sign-up.</text>
+  <text x="80" y="552" font-family="Inter, Segoe UI, sans-serif" font-size="27" fill="#B9FF3C">
+    Two calculators, fifteen answers, zero sign ups.
+  </text>
 </svg>

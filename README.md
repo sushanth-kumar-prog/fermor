@@ -82,6 +82,40 @@ vercel.json                SPA rewrites + build config
 `SipCalculator`, `EmiCalculator` and `SampleSnapshot` are card bodies rendered inside
 `FeatureCarousel`, not sections of their own.
 
+## Brand
+
+The mark is a two tone ring around an ascending bar chart, with a trend arrow and a rupee
+sign. It is drawn as inline SVG, not an image file, so it stays sharp at any size and
+colours itself to whatever it sits on.
+
+`src/components/fermor/Logo.jsx` exports:
+
+- `LogoMark` — the mark alone, takes `size` and `tone`
+- `Logo` — the mark plus the wordmark, the default export
+
+`tone` is what keeps it legible on both planes:
+
+| `tone` | Used on | Dark half renders as |
+|---|---|---|
+| `"dark"` | light backgrounds | `#0C2314` forest |
+| `"light"` | forest sections, so navbar and footer | `#F4F4F2` |
+
+The lime half is always `#B9FF3C`. If you change the accent in `index.css`, update the
+`LIME` constant in `Logo.jsx` to match.
+
+Two static copies exist for places a React component will not render:
+
+| File | Purpose |
+|---|---|
+| `public/favicon.svg` | Simplified to ring and bars only, since the arrow and rupee are illegible below 16px. Sits on a forest tile so it holds contrast on light browser chrome. |
+| `public/og.svg` | Social preview card, mark plus headline |
+
+**Before going further on the identity:** the reference artwork this mark was drawn from
+was a watermarked Shutterstock file (ID 2476228421). A vector interpretation was built
+instead, which is what is committed. If you want the original artwork rather than this
+interpretation, you will need to purchase a licence and it will need redrawing as vector
+anyway, so the mark would still differ from the raster.
+
 ## Design system
 
 Tokens live in `src/index.css` under `--fm-*`. Tailwind exposes `lime`, `forest` and

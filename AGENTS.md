@@ -31,6 +31,10 @@ Start with `README.md` for setup, structure, and the design system.
   new hex literals, and keep lime (`#B9FF3C`) paired with dark text.
 - **The brand name is not hardcoded.** Change it in `src/lib/fermor/config.js`; the logo,
   footer, and 404 all read from there.
+- **The logo is inline SVG, not an image.** `Logo.jsx` takes a `tone` prop that swaps the
+  dark half between forest and off white so the mark works on either plane. If you move it
+  onto a third background, pass the right tone rather than hardcoding a colour. The
+  `LIME` constant there has to be kept in sync with the accent in `index.css`.
 - **Respect `prefers-reduced-motion`.** `index.css` neutralises transitions globally;
   the number-tweening hook in `SipCalculator.jsx` short-circuits when it's set.
 - Run `npm run lint` and `npm run build` before finishing code changes.
